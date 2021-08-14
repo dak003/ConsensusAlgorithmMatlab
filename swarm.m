@@ -41,9 +41,9 @@ for ii = 1:1:N
             if dist(ii, jj) <= rr
                 repulse(ii, jj) = true;
             elseif dist(ii, jj) > rr && dist(ii,jj) <= ro
-                %orient(... ??? COMPLETE and uncomment!!!!!
+                orient(ii, jj) = true;
             elseif dist(ii, jj) > ro && dist(ii,jj) <= ra
-                %attract(... ??? COMPLETE and uncomment!!!!!
+                attract(ii, jj) = true;
             else
             end
         end
@@ -64,11 +64,11 @@ for ii = 1:1:N
     else
         %if not busy repulsing... orient and attract
         for jj = 1:1:N
-            if orient(ii, jj) && ~blind_neighbors(ii,jj)
-                %dxi(1:2, i) = ??? COMPLETE and uncomment!!!!!
+            if orient(ii, jj) && ~blind_neighbors(ii,jj) 
+                dxi(1:2, ii) = x(1:2, jj) - x(1:2, ii) - dxi(1:2, ii);
             end
             if attract(ii, jj) && ~blind_neighbors(ii,jj)
-                %dxi(1:2, i) = ??? COMPLETE and uncomment!!!!!
+                dxi(1:2, ii) = x(1:2, jj) - x(1:2, ii) - dxi(1:2, ii);
             end
         end
     end
