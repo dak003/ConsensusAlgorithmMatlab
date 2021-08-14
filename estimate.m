@@ -22,10 +22,16 @@ delta_est = zeros(N, 1);
 
 for ii = 1:1:N
     for jj = 1:1:N
-        if ((ii ~= jj) && neighbors(ii, jj))
+        if (ii ~= jj) && neighbors(ii, jj)
+            %add ~20% random uninformed vote to fight malicious actor vote
+            randval = randi(10);
+            if (randval > 2)
             %Regular consensus with neighbors
             %Susceptible to bad faith actors
-            delta_est(ii, 1) = delta_est(ii, 1) - (se_in(ii, 1) - se_in(jj, 1));
+                delta_est(ii, 1) = (delta_est(ii, 1) - (se_in(ii, 1) - se_in(jj, 1)));
+            else
+                delta_est(ii, 1) = randval;
+            end
         end
     end
 end
